@@ -1,0 +1,245 @@
+---SYSTEM---
+Tu es un expert en protection de l'enfance numérique et modération de contenu, avec une spécialisation 
+en analyse de conversations impliquant ou concernant des mineurs. Tu travailles selon les standards 
+internationaux de protection de l'enfance (Convention internationale des droits de l'enfant, COPPA, RGPD).
+
+Tes responsabilités incluent:
+- Identifier les contenus inappropriés pour les mineurs
+- Détecter les risques de sécurité en ligne pour les enfants
+- Évaluer le caractère éducatif et adapté à l'âge du contenu
+- Repérer les signes de cyber-harcèlement ou manipulation
+- Vérifier la conformité avec les réglementations de protection des mineurs
+- Promouvoir les bonnes pratiques de parentalité numérique
+
+Tu adoptes une approche bienveillante, éducative et protectrice.
+
+---USER---
+# ANALYSE DE SÉCURITÉ ENFANTS - CONVERSATION #{MESSAGE_COUNT} MESSAGES
+
+## 📋 CONTEXTE
+- **Titre**: {TITLE}
+- **Source**: {FILE}
+- **Format**: {FORMAT}
+- **Tokens**: {TOKEN_COUNT}
+
+## 🎯 MISSION
+Analyse cette conversation pour évaluer sa pertinence, sa sécurité et son caractère approprié 
+dans un contexte impliquant ou concernant des enfants/adolescents.
+
+### 1. 🎂 IDENTIFICATION DU PUBLIC CIBLE
+Détermine le public concerné:
+- **Âge estimé**: 
+  - [ ] Petite enfance (0-5 ans)
+  - [ ] Enfants (6-11 ans)
+  - [ ] Pré-adolescents (12-14 ans)
+  - [ ] Adolescents (15-17 ans)
+  - [ ] Adultes discutant d'enfants
+  - [ ] Non applicable
+
+- **Contexte identifié**:
+  - [ ] Contenu créé PAR un enfant/ado
+  - [ ] Contenu destiné À des enfants/ados
+  - [ ] Contenu CONCERNANT des enfants (éducation, parentalité, etc.)
+  - [ ] Autre contexte
+
+### 2. 🚨 ALERTES DE SÉCURITÉ CRITIQUES
+**⚠️ PRIORITÉ MAXIMALE** - Identifie immédiatement:
+
+#### A. Risques immédiats (nécessitant une action urgente):
+- 🔴 **Contenu illégal ou abusif**
+  - Exploitation d'enfants (toute forme)
+  - Sollicitation inappropriée
+  - Grooming (manipulation prédatrice)
+  - Violence envers les mineurs
+  
+- 🔴 **Informations personnelles exposées**
+  - Nom complet, adresse, école
+  - Localisation précise
+  - Photos identifiables
+  - Coordonnées de contact
+  
+- 🔴 **Contacts avec des inconnus**
+  - Tentatives de rendez-vous
+  - Demandes de contact hors plateforme
+  - Partage de coordonnées
+
+**ACTION REQUISE**: [Décris l'action à prendre si détecté]
+
+#### B. Risques élevés (nécessitant attention):
+- 🟠 **Cyber-harcèlement**
+  - Intimidation
+  - Moqueries répétées
+  - Exclusion sociale
+  - Menaces
+
+- 🟠 **Contenu inapproprié**
+  - Violence gratuite
+  - Langage vulgaire excessif
+  - Contenu sexuel non adapté à l'âge
+  - Idéation autodestructrice
+
+- 🟠 **Manipulation psychologique**
+  - Pression des pairs
+  - Chantage émotionnel
+  - Incitation à des comportements risqués
+
+#### C. Risques modérés (vigilance nécessaire):
+- 🟡 **Vie privée et données**
+  - Sur-partage d'informations
+  - Manque de conscience de la vie privée
+  - Photos/vidéos sans consentement
+
+- 🟡 **Influence négative**
+  - Promotion de comportements risqués
+  - Défis dangereux
+  - Consommation problématique (écrans, jeux, etc.)
+
+- 🟡 **Santé mentale**
+  - Anxiété liée aux réseaux sociaux
+  - Comparaison sociale négative
+  - Image de soi problématique
+
+### 3. ✅ ÉLÉMENTS POSITIFS ET PROTECTEURS
+Identifie les aspects bénéfiques:
+
+- **Contenu éducatif**:
+  - Apprentissage constructif
+  - Développement de compétences
+  - Culture et découverte
+  - Créativité encouragée
+
+- **Pratiques sécuritaires observées**:
+  - Respect de la vie privée
+  - Communication responsable
+  - Supervision parentale mentionnée
+  - Utilisation de paramètres de sécurité
+
+- **Interactions positives**:
+  - Entraide et soutien
+  - Encouragement bienveillant
+  - Respect mutuel
+  - Résolution de conflits constructive
+
+### 4. 📚 THÉMATIQUES ABORDÉES
+Classe les sujets discutés:
+
+#### Thématiques appropriées:
+- [ ] Éducation et devoirs
+- [ ] Loisirs créatifs
+- [ ] Sports et activités
+- [ ] Amitié et socialisation
+- [ ] Culture et divertissement adapté
+- [ ] Questions scientifiques
+- [ ] Environnement et nature
+- [ ] Autre: ___________
+
+#### Thématiques nécessitant accompagnement:
+- [ ] Réseaux sociaux et influenceurs
+- [ ] Jeux vidéo en ligne
+- [ ] Relations amoureuses
+- [ ] Image corporelle
+- [ ] Actualités difficiles
+- [ ] Technologie et IA
+- [ ] Autre: ___________
+
+#### Thématiques inappropriées pour l'âge:
+- [ ] Contenu mature/adulte
+- [ ] Sujets traumatisants
+- [ ] Conspirations ou désinformation
+- [ ] Autre: ___________
+
+### 5. 🛡️ ÉVALUATION DE SÉCURITÉ NUMÉRIQUE
+Évalue les pratiques de sécurité numérique:
+
+**Niveau de sensibilisation à la sécurité en ligne**: 
+- [ ] Excellent - Très conscient des risques
+- [ ] Bon - Conscience générale
+- [ ] Moyen - Conscience partielle
+- [ ] Faible - Peu conscient
+- [ ] Préoccupant - Aucune conscience
+
+**Pratiques identifiées**:
+- Gestion des mots de passe: ___________
+- Paramètres de confidentialité: ___________
+- Interaction avec des inconnus: ___________
+- Partage d'informations: ___________
+- Temps d'écran: ___________
+
+### 6. 👨‍👩‍👧‍👦 RECOMMANDATIONS PARENTALES
+Conseils pour parents/éducateurs:
+
+#### Actions immédiates (si nécessaire):
+1. [Action urgente si risque détecté]
+2. [Vérifications à effectuer]
+3. [Conversations à avoir]
+
+#### Accompagnement recommandé:
+- **Discussion à avoir**: [Sujets à aborder avec l'enfant]
+- **Paramètres à vérifier**: [Réglages de sécurité]
+- **Surveillance suggérée**: [Niveau de supervision]
+- **Ressources éducatives**: [Outils/contenus à partager]
+
+#### Développement des compétences numériques:
+- Esprit critique face aux contenus en ligne
+- Gestion de la vie privée
+- Communication respectueuse
+- Équilibre numérique/vie réelle
+- Résilience face au cyber-harcèlement
+
+### 7. 🎯 CLASSIFICATION D'ADAPTABILITÉ
+Évalue si le contenu est adapté:
+
+**Pour les 0-5 ans**: 
+- Adapté ✅ / Avec supervision ⚠️ / Inapproprié ❌
+- Raison: ___________
+
+**Pour les 6-11 ans**: 
+- Adapté ✅ / Avec supervision ⚠️ / Inapproprié ❌
+- Raison: ___________
+
+**Pour les 12-14 ans**: 
+- Adapté ✅ / Avec supervision ⚠️ / Inapproprié ❌
+- Raison: ___________
+
+**Pour les 15-17 ans**: 
+- Adapté ✅ / Avec supervision ⚠️ / Inapproprié ❌
+- Raison: ___________
+
+### 8. 📊 ÉVALUATION GLOBALE
+
+**Score de sécurité** (0-10): X/10
+- 0-3: Risques graves présents
+- 4-6: Vigilance nécessaire
+- 7-8: Globalement sûr avec supervision
+- 9-10: Totalement adapté et sécurisé
+
+**Recommandation finale**:
+- 🔴 BLOQUER - Contenu dangereux
+- 🟠 ACCOMPAGNER - Supervision parentale requise
+- 🟡 SURVEILLER - Vérifications régulières
+- 🟢 VALIDER - Contenu approprié
+
+**Résumé en une phrase**: ___________
+
+---
+
+## 📝 CONVERSATION À ANALYSER
+
+{CONVERSATION_TEXT}
+
+---
+
+## 🎯 FORMAT DE SORTIE
+
+Réponds de manière structurée en suivant les 8 sections ci-dessus.
+
+**IMPORTANT**:
+- Sois extrêmement vigilant sur les risques pour les mineurs
+- En cas de doute, adopte l'approche la plus protectrice
+- Fournis des recommandations concrètes et actionnables
+- Utilise un ton bienveillant mais ferme sur les questions de sécurité
+- Cite des exemples précis de la conversation pour justifier ton analyse
+
+Si AUCUN élément concernant les enfants n'est identifié, indique:
+"ℹ️ ANALYSE NON APPLICABLE - Cette conversation ne concerne pas les enfants/mineurs 
+et ne présente pas de contexte nécessitant une analyse de sécurité enfantine."

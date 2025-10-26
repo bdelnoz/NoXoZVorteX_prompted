@@ -1,0 +1,453 @@
+╔═══════════════════════════════════════════════════════════════════════════════
+
+## Variables disponibles dans les prompts
+
+{CONVERSATION_TEXT}  - Texte complet de la conversation
+{TITLE}              - Titre de la conversation  
+{MESSAGE_COUNT}      - Nombre de messages
+{TOKEN_COUNT}        - Nombre de tokens
+{FORMAT}             - Format source (CHATGPT/LECHAT/CLAUDE)
+{FILE}               - Nom du fichier source
+
+## Syntaxe SYSTEM/USER
+
+Pour séparer le contexte système du prompt utilisateur:
+
+```
+---SYSTEM---
+Tu es un expert en [DOMAINE] avec [EXPÉRIENCE].
+Tes compétences incluent: [LISTE]
+
+---USER---
+# ANALYSE DE [TYPE]
+
+Conversation:
+{CONVERSATION_TEXT}
+
+Fournis: [INSTRUCTIONS]
+```
+
+═══════════════════════════════════════════════════════════════════════════════
+4. FORMATS DE SORTIE DÉTAILLÉS
+═══════════════════════════════════════════════════════════════════════════════
+
+## CSV (--format csv)
+Colonnes: conversation_id, titre_original, titre, partie, response, success,
+          error, token_count, fichier_source, format, model_used
+
+Avantages: Compatible Excel/LibreOffice, facile à filtrer et trier
+Utilisation: Analyse de données, import dans bases de données
+
+## JSON (--format json)
+Structure hiérarchique avec tous les champs préservés
+  
+Avantages: Facile à parser programmatiquement, typage préservé
+Utilisation: Intégration avec d'autres outils, pipelines automatisés
+
+## TXT (--format txt)
+Format texte simple avec séparateurs visuels
+
+Avantages: Lecture directe, aucun outil nécessaire
+Utilisation: Lecture rapide, archivage simple
+
+## Markdown (--format markdown)
+Format avec table des matières cliquable, métadonnées, statistiques
+
+Avantages: Prévisualisation GitHub, export PDF/HTML facile, navigation aisée
+Utilisation: Rapports professionnels, documentation, partage
+
+═══════════════════════════════════════════════════════════════════════════════
+5. ORGANISATION PROFESSIONNELLE DES FICHIERS
+═══════════════════════════════════════════════════════════════════════════════
+
+## Structure recommandée
+
+```
+projet_analyse_ia/
+│
+├── analyse_conversations_merged.py    # Script principal
+├── config.py                          # Configuration
+├── help.py                            # Système d'aide
+├── prompt_executor.py                 # Exécution prompts
+├── result_formatter.py                # Formatage résultats
+├── extractors.py                      # Extraction messages
+├── utils.py                           # Utilitaires
+├── install.py                         # Installation
+│
+├── .venv_analyse/                     # Environnement virtuel (auto-créé)
+│
+├── data/                              # VOS EXPORTS JSON
+│   ├── chatgpt/
+│   │   ├── export_2025_01.json
+│   │   └── export_2025_02.json
+│   ├── claude/
+│   │   └── conversations_2025.json
+│   └── lechat/
+│       └── chat_mistral.json
+│
+├── prompts/                           # VOS PROMPTS PERSONNALISÉS
+│   ├── prompt_resume.txt
+│   ├── prompt_security_analysis.txt
+│   ├── prompt_child_safety_analysis.txt
+│   └── prompt_custom_analysis.txt
+│
+├── logs/                              # LOGS (auto-créé avec --target-logs)
+│   ├── 2025-10-26/
+│   │   └── log.prompt_executor.v3.0.0.log
+│   └── 2025-10-27/
+│
+├── results/                           # RÉSULTATS (auto-créé avec --target-results)
+│   ├── 2025-10-26/
+│   │   ├── security_analysis_143052.md
+│   │   └── topics_extract_150234.csv
+│   └── 2025-10-27/
+│
+├── help_advanced.txt                  # Cette aide (éditable)
+└── STRUCTURE.md                       # Documentation complète
+```
+
+═══════════════════════════════════════════════════════════════════════════════
+6. EXEMPLES AVANCÉS ET CAS D'USAGE
+═══════════════════════════════════════════════════════════════════════════════
+
+## Cas d'usage 1: Audit de sécurité complet
+
+```bash
+# 1. Préparation
+mkdir -p logs/security results/security
+export MISTRAL_API_KEY='votre_clé'
+
+# 2. Exécution
+python analyse_conversations_merged.py --exec \\
+  --recursive --aiall \\
+  --fichier ./data/ \\
+  --prompt-file security_analysis \\
+  --target-logs ./logs/security \\
+  --target-results ./results/security \\
+  --format markdown \\
+  --workers 10 \\
+  --delay 0.8
+
+# 3. Post-traitement
+cd results/security
+ls -lh *.md
+```
+
+## Cas d'usage 2: Extraction de compétences pour CV
+
+```bash
+# Créer un prompt personnalisé
+cat > prompts/prompt_cv_skills.txt << 'EOF'
+Tu es un expert RH spécialisé en tech.
+
+Identifie UNIQUEMENT les compétences techniques professionnelles 
+dans cette conversation qui enrichiraient un CV ou LinkedIn.
+
+Conversation:
+{CONVERSATION_TEXT}
+
+Format: liste à puces, une compétence par ligne, catégorisée.
+EOF
+
+# Exécuter
+python analyse_conversations_merged.py --exec \\
+  --aiall --fichier data/**/*.json \\
+  --prompt-file cv_skills \\
+  --format txt \\
+  --output mes_competences.txt \\
+  --target-results ./cv
+```
+
+## Cas d'usage 3: Analyse de contenu pour modération
+
+```bash
+python analyse_conversations_merged.py --exec \\
+  --aiall --fichier conversations_forum/*.json \\
+  --prompt-file child_safety_analysis \\
+  --target-results ./moderation \\
+  --format json \\
+  --workers 5
+```
+
+## Cas d'usage 4: Pipeline automatisé quotidien
+
+```bash
+#!/bin/bash
+# script_analyse_quotidienne.sh
+
+DATE=$(date +%Y-%m-%d)
+LOGS_DIR="./logs/${DATE}"
+RESULTS_DIR="./results/${DATE}"
+
+export MISTRAL_API_KEY=$(cat .mistral_key)
+
+python analyse_conversations_merged.py --exec \\
+  --recursive --aiall \\
+  --fichier /data/exports/ \\
+  --prompt-file security_analysis \\
+  --target-logs "${LOGS_DIR}" \\
+  --target-results "${RESULTS_DIR}" \\
+  --format markdown \\
+  --workers 15
+
+# Notification
+echo "Analyse terminée: ${RESULTS_DIR}" | mail -s "Rapport IA" admin@example.com
+```
+
+═══════════════════════════════════════════════════════════════════════════════
+7. TROUBLESHOOTING DÉTAILLÉ
+═══════════════════════════════════════════════════════════════════════════════
+
+## Problème: ImportError: No module named 'X'
+**Cause**: Dépendances manquantes
+**Solutions**:
+```bash
+# 1. Vérifier l'installation
+python analyse_conversations_merged.py --prerequis
+
+# 2. Réinstaller
+python analyse_conversations_merged.py --install
+
+# 3. Vérifier le venv
+source .venv_analyse/bin/activate
+pip list
+
+# 4. Installation manuelle si nécessaire
+pip install requests tqdm tiktoken
+```
+
+## Problème: "Prompt introuvable"
+**Cause**: Fichier mal nommé ou mal placé
+**Solutions**:
+```bash
+# 1. Vérifier les prompts disponibles
+python analyse_conversations_merged.py --prompt-list
+
+# 2. Vérifier le fichier
+ls -la prompts/prompt_*.txt
+
+# 3. Créer le prompt
+echo "Votre prompt" > prompts/prompt_test.txt
+
+# 4. Utiliser le nom sans préfixe
+python ... --prompt-file test  # pas prompt_test.txt
+```
+
+## Problème: Erreur "Permission denied" sur --target-logs
+**Cause**: Droits insuffisants
+**Solutions**:
+```bash
+# 1. Vérifier les permissions
+ls -ld /chemin/vers/logs
+
+# 2. Créer avec les bons droits
+mkdir -p ~/mes_logs
+chmod 755 ~/mes_logs
+
+# 3. Utiliser un chemin relatif
+--target-logs ./logs  # Dans le dossier courant
+```
+
+## Problème: Rate limit API (429)
+**Cause**: Trop de requêtes simultanées
+**Solutions**:
+```bash
+# Réduire la charge
+python ... \\
+  --workers 3 \\      # Au lieu de 10
+  --delay 1.5         # Au lieu de 0.5
+```
+
+## Problème: Out of memory
+**Cause**: Trop de conversations en mémoire
+**Solutions**:
+```bash
+# Traiter par lots
+python ... --only-split --fichier batch1/*.json
+python ... --not-split --fichier batch1/*.json
+
+# Ou réduire les workers
+--workers 2
+```
+
+═══════════════════════════════════════════════════════════════════════════════
+8. BONNES PRATIQUES PROFESSIONNELLES
+═══════════════════════════════════════════════════════════════════════════════
+
+## Sécurité
+
+1. **Ne jamais commiter les clés API**
+   ```bash
+   # .gitignore
+   .mistral_key
+   .env
+   *.log
+   results/
+   logs/
+   ```
+
+2. **Utiliser des variables d'environnement**
+   ```bash
+   # .env
+   MISTRAL_API_KEY=votre_clé_ici
+   
+   # Charger avec
+   export $(cat .env | xargs)
+   ```
+
+3. **Tester en simulation d'abord**
+   ```bash
+   # Toujours tester sans consommer de crédits
+   python ... --simulate --prompt-file nouveau_prompt
+   ```
+
+## Performance
+
+1. **Ajuster les workers selon votre machine**
+   - CPU 4 cœurs: --workers 3-5
+   - CPU 8 cœurs: --workers 10-15
+   - CPU 16+ cœurs: --workers 20-30
+
+2. **Utiliser le filtrage pour les gros volumes**
+   ```bash
+   # Traiter les longues conversations séparément
+   python ... --only-split --workers 5
+   python ... --not-split --workers 15
+   ```
+
+3. **Monitorer les logs en temps réel**
+   ```bash
+   tail -f logs/$(date +%Y%m%d)/log.prompt_executor.v3.0.0.log
+   ```
+
+## Organisation
+
+1. **Nommer clairement vos prompts**
+   ```
+   ✅ prompt_security_audit_2025.txt
+   ✅ prompt_extract_technical_skills.txt
+   ❌ prompt_test.txt
+   ❌ p1.txt
+   ```
+
+2. **Organiser par date**
+   ```bash
+   --target-results ./results/$(date +%Y-%m-%d)
+   ```
+
+3. **Archiver régulièrement**
+   ```bash
+   tar -czf archive_$(date +%Y%m).tar.gz results/ logs/
+   ```
+
+═══════════════════════════════════════════════════════════════════════════════
+9. DÉVELOPPEMENT DE PROMPTS PERSONNALISÉS
+═══════════════════════════════════════════════════════════════════════════════
+
+## Template de base
+
+```
+---SYSTEM---
+Tu es un expert en [VOTRE_DOMAINE].
+
+Ton expertise inclut:
+- [Compétence 1]
+- [Compétence 2]
+- [Compétence 3]
+
+---USER---
+# ANALYSE: [TYPE_ANALYSE]
+
+## CONTEXTE
+- Titre: {TITLE}
+- Messages: {MESSAGE_COUNT}
+- Tokens: {TOKEN_COUNT}
+
+## OBJECTIF
+[Décrivez ce que vous voulez obtenir]
+
+## INSTRUCTIONS
+1. [Instruction 1]
+2. [Instruction 2]
+3. [Instruction 3]
+
+## FORMAT DE SORTIE
+[Format attendu précis]
+
+## CONVERSATION À ANALYSER
+{CONVERSATION_TEXT}
+```
+
+## Conseils de rédaction
+
+1. **Soyez spécifique**: Plus votre prompt est précis, meilleure sera la réponse
+2. **Utilisez des exemples**: Montrez le format de sortie souhaité
+3. **Structurez clairement**: Sections, numérotation, titres
+4. **Testez itérativement**: --simulate puis ajustez
+
+═══════════════════════════════════════════════════════════════════════════════
+10. RESSOURCES ET SUPPORT
+═══════════════════════════════════════════════════════════════════════════════
+
+## Documentation
+- STRUCTURE.md: Documentation technique complète
+- help_advanced.txt: Ce fichier (éditable)
+- --changelog: Historique des versions
+
+## Support
+Auteur: Bruno DELNOZ
+Email: bruno.delnoz@protonmail.com
+
+## Liens utiles
+- API Mistral: https://docs.mistral.ai
+- Formats JSON: Voir extractors.py
+- Prompts exemples: Dossier prompts/
+
+═══════════════════════════════════════════════════════════════════════════════
+
+Dernière mise à jour: 2025-10-26
+Version du script: 3.0.0
+
+Ce fichier est éditable. Personnalisez-le selon vos besoins.
+Pour régénérer la version par défaut: supprimez ce fichier et relancez --help-adv
+╗
+║                   AI CONVERSATION PROMPT EXECUTOR - AIDE AVANCÉE              ║
+║                              Version 3.0.0                                     ║
+╚═══════════════════════════════════════════════════════════════════════════════╝
+
+Auteur  : Bruno DELNOZ
+Email   : bruno.delnoz@protonmail.com
+Date    : 2025-10-26
+
+═══════════════════════════════════════════════════════════════════════════════
+📋 TABLE DES MATIÈRES
+═══════════════════════════════════════════════════════════════════════════════
+
+1. Introduction et philosophie
+2. Arguments détaillés
+3. Gestion des prompts
+4. Variables disponibles dans les prompts
+5. Formats de sortie
+6. Organisation des fichiers
+7. Exemples d'utilisation avancés
+8. Cas d'usage professionnels
+9. Troubleshooting
+10. Bonnes pratiques
+
+═══════════════════════════════════════════════════════════════════════════════
+1. INTRODUCTION ET PHILOSOPHIE
+═══════════════════════════════════════════════════════════════════════════════
+
+Ce système permet d'appliquer des prompts personnalisés sur vos conversations
+AI exportées (ChatGPT, Claude, LeChat/Mistral). Au lieu d'une analyse fixe,
+vous définissez exactement ce que vous voulez extraire via des fichiers .txt.
+
+NOUVEAUTÉS v3.0 :
+  ✅ Système de prompts personnalisables (prompt_*.txt)
+  ✅ Support multi-formats (auto-détection)
+  ✅ Organisation des fichiers (--target-logs, --target-results)
+  ✅ Détection et élimination des doublons
+  ✅ Formats de sortie multiples (CSV, JSON, TXT, Markdown)
+  ✅ Gestion intelligente des conversations longues (split automatique)
+
+═══════════════════════════════════════════════════════════

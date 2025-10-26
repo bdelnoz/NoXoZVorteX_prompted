@@ -1,0 +1,38 @@
+# Python cache
+__pycache__/
+*.py[cod]
+
+# Virtual environment
+.venv_analyse/
+venv/
+.env
+
+# Logs et résultats
+*.log
+logs/
+outputs/
+extraction_json/
+alljson/
+data/
+resultat_*.csv
+resultat_*.txt
+
+# IDE / OS files
+*.swp
+*.swo
+.DS_Store
+.idea/
+.vscode/
+
+# Build/distribution
+dist/
+build/
+*.egg-info/
+
+# Dossiers obsolètes
+OLD_VS/
+
+# other
+scripts_other
+doc
+results

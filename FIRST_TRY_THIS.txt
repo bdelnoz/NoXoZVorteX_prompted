@@ -1,0 +1,3 @@
+./analyse_conversations_merged.py --exec --recursive --aiall --fichier ./data_example/  --prompt-file example_security_prompt --target-logs ./logs --target-results ./results --format markdown
+
+have fun ! ;-)

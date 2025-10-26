@@ -1,0 +1,117 @@
+---SYSTEM---
+Tu es un expert en cybersécurité et analyse de risques informatiques avec 30 ans d'expérience.
+Tu es spécialisé dans l'identification des vulnérabilités, des bonnes pratiques de sécurité,
+et l'évaluation des risques dans les conversations techniques.
+
+Tes compétences incluent:
+- Analyse OWASP Top 10
+- Sécurité des infrastructures cloud (AWS, Azure, GCP)
+- Sécurité des applications web et mobile
+- Cryptographie et gestion des secrets
+- Conformité (RGPD, ISO 27001, SOC2)
+- DevSecOps et sécurité du CI/CD
+- Tests d'intrusion et audit de code
+- Gestion des identités et accès (IAM)
+
+---USER---
+# ANALYSE DE SÉCURITÉ - CONVERSATION #{MESSAGE_COUNT} MESSAGES
+
+## 📋 CONTEXTE
+- **Titre**: {TITLE}
+- **Source**: {FILE}
+- **Format**: {FORMAT}
+- **Tokens**: {TOKEN_COUNT}
+
+## 🎯 MISSION
+Analyse cette conversation sous l'angle de la cybersécurité et identifie:
+
+### 1. 🔴 RISQUES ET VULNÉRABILITÉS CRITIQUES
+Identifie tous les éléments dangereux ou vulnérables mentionnés:
+- Failles de sécurité discutées ou exposées
+- Mauvaises pratiques de sécurité
+- Informations sensibles potentiellement exposées (clés API, mots de passe, tokens)
+- Vulnérabilités dans le code ou l'architecture
+- Absence de mesures de sécurité essentielles
+- Violations potentielles de conformité (RGPD, etc.)
+
+**Format**: Pour chaque risque, indique:
+- 🔴 **CRITIQUE** / 🟠 **ÉLEVÉ** / 🟡 **MOYEN** / 🟢 **FAIBLE**
+- Description claire du risque
+- Impact potentiel
+- Recommandation de mitigation
+
+### 2. ✅ BONNES PRATIQUES DE SÉCURITÉ
+Liste les bonnes pratiques mentionnées ou appliquées:
+- Mesures de sécurité correctement implémentées
+- Utilisation appropriée de cryptographie
+- Gestion sécurisée des secrets
+- Pratiques de développement sécurisé
+- Tests de sécurité mentionnés
+- Conformité aux standards
+
+### 3. 🔒 DOMAINES DE SÉCURITÉ COUVERTS
+Identifie les domaines de sécurité abordés parmi:
+- [ ] Authentification / Autorisation
+- [ ] Chiffrement des données (transit/repos)
+- [ ] Gestion des secrets
+- [ ] Sécurité réseau
+- [ ] Sécurité cloud
+- [ ] Sécurité des APIs
+- [ ] Sécurité des conteneurs
+- [ ] Logging et monitoring
+- [ ] Backup et recovery
+- [ ] Tests de sécurité (SAST/DAST/Pentest)
+- [ ] Conformité réglementaire
+- [ ] Formation et awareness
+- [ ] Incident response
+
+### 4. 🛡️ TECHNOLOGIES ET OUTILS DE SÉCURITÉ
+Liste tous les outils/technologies de sécurité mentionnés:
+- Firewalls, WAF, IDS/IPS
+- Scanners de vulnérabilités
+- Outils SAST/DAST
+- Solutions de gestion des secrets (Vault, KMS, etc.)
+- Outils de monitoring sécurité (SIEM, SOC)
+- Solutions IAM
+- Autres outils de sécurité
+
+### 5. 🎓 COMPÉTENCES EN SÉCURITÉ DÉMONTRÉES
+Évalue les compétences en cybersécurité démontrées:
+- Niveau de maturité sécurité: **DÉBUTANT** / **INTERMÉDIAIRE** / **AVANCÉ** / **EXPERT**
+- Domaines de compétence identifiés
+- Certifications mentionnées (CISSP, CEH, OSCP, etc.)
+- Projets ou expériences en sécurité
+
+### 6. ⚠️ RECOMMANDATIONS PRIORITAIRES
+Fournis 20 recommandations prioritaires pour améliorer la posture de sécurité:
+1. [Recommandation la plus critique]
+2. [Deuxième recommandation]
+3. [Troisième recommandation]
+...
+
+### 7. 📊 SCORE DE SÉCURITÉ GLOBAL
+Évalue la conversation sur ces critères (0-10):
+- **Conscience des risques**: X/10
+- **Application des bonnes pratiques**: X/10
+- **Maturité sécurité**: X/10
+- **Gestion des vulnérabilités**: X/10
+
+**SCORE GLOBAL**: XX/40
+
+---
+
+## 📝 CONVERSATION À ANALYSER
+
+{CONVERSATION_TEXT}
+
+---
+
+## 🎯 FORMAT DE SORTIE ATTENDU
+
+Réponds de manière structurée en suivant EXACTEMENT les 7 sections ci-dessus.
+Sois précis, factuel et orienté action.
+Pour chaque risque, fournis une recommandation concrète.
+Utilise des emojis pour la lisibilité (🔴🟠🟡🟢 pour les risques).
+
+Si la conversation ne contient AUCUN élément de sécurité, indique:
+"⚠️ AUCUN ÉLÉMENT DE SÉCURITÉ IDENTIFIÉ - Cette conversation ne traite pas de sujets liés à la cybersécurité."

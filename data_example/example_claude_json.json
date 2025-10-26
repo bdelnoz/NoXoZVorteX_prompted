@@ -1,0 +1,54 @@
+[
+  {
+    "uuid": "conv_abc123def456",
+    "name": "Secure Coding Review",
+    "created_at": "2024-10-26T14:20:00.000Z",
+    "updated_at": "2024-10-26T14:28:00.000Z",
+    "chat_messages": [
+      {
+        "uuid": "msg_001",
+        "text": "Can you review this authentication code for security issues?\n\n```python\ndef login(username, password):\n    query = f\"SELECT * FROM users WHERE username='{username}' AND password='{password}'\"\n    result = db.execute(query)\n    if result:\n        session['user'] = username\n        return True\n    return False\n```",
+        "sender": "human",
+        "created_at": "2024-10-26T14:20:05.000Z"
+      },
+      {
+        "uuid": "msg_002",
+        "text": "I've identified several critical security vulnerabilities in this code:\n\n**🔴 CRITICAL ISSUES:**\n\n1. **SQL Injection Vulnerability**\n   - Using string formatting to build SQL queries\n   - An attacker could use: `username = \"admin' --\"` to bypass authentication\n   - **Fix**: Use parameterized queries\n\n2. **Plaintext Password Storage**\n   - Passwords appear to be stored in plaintext\n   - **Fix**: Use bcrypt, argon2, or scrypt for password hashing\n\n3. **No Password Verification**\n   - Comparing passwords directly without hashing\n   - **Fix**: Hash incoming password and compare with stored hash\n\n4. **Weak Session Management**\n   - Only storing username in session\n   - No session timeout or CSRF protection\n   - **Fix**: Use secure session library with proper configuration\n\n**✅ SECURE VERSION:**\n\n```python\nimport bcrypt\nfrom sqlalchemy import text\n\ndef login(username, password):\n    # Use parameterized query\n    query = text(\"SELECT id, password_hash FROM users WHERE username = :username\")\n    result = db.execute(query, {\"username\": username}).fetchone()\n    \n    if result:\n        stored_hash = result['password_hash']\n        # Verify password against hash\n        if bcrypt.checkpw(password.encode('utf-8'), stored_hash.encode('utf-8')):\n            # Store minimal info in session\n            session['user_id'] = result['id']\n            session['authenticated'] = True\n            # Set session timeout\n            session.permanent = True\n            return True\n    \n    # Same response for wrong username or password (prevents user enumeration)\n    return False\n\ndef register(username, password):\n    # Hash password before storing\n    password_hash = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())\n    query = text(\"INSERT INTO users (username, password_hash) VALUES (:username, :hash)\")\n    db.execute(query, {\"username\": username, \"hash\": password_hash.decode('utf-8')})\n```\n\n**Additional Recommendations:**\n- Implement rate limiting on login attempts\n- Add CSRF tokens to forms\n- Use HTTPS only\n- Implement account lockout after failed attempts\n- Add logging for security events\n- Consider implementing 2FA/MFA",
+        "sender": "assistant",
+        "created_at": "2024-10-26T14:21:30.000Z"
+      },
+      {
+        "uuid": "msg_003",
+        "text": "Great analysis! What about protecting API endpoints from abuse?",
+        "sender": "human",
+        "created_at": "2024-10-26T14:25:00.000Z"
+      },
+      {
+        "uuid": "msg_004",
+        "text": "Here's a comprehensive approach to protecting API endpoints:\n\n**1. Authentication & Authorization**\n```python\nfrom functools import wraps\nfrom flask import request, jsonify\nimport jwt\n\ndef require_auth(f):\n    @wraps(f)\n    def decorated(*args, **kwargs):\n        token = request.headers.get('Authorization')\n        if not token:\n            return jsonify({'error': 'No token provided'}), 401\n        \n        try:\n            # Verify JWT token\n            payload = jwt.decode(token.split()[1], SECRET_KEY, algorithms=['HS256'])\n            request.user_id = payload['user_id']\n        except jwt.InvalidTokenError:\n            return jsonify({'error': 'Invalid token'}), 401\n        \n        return f(*args, **kwargs)\n    return decorated\n```\n\n**2. Rate Limiting**\n```python\nfrom flask_limiter import Limiter\nfrom flask_limiter.util import get_remote_address\n\nlimiter = Limiter(\n    app,\n    key_func=get_remote_address,\n    default_limits=[\"200 per day\", \"50 per hour\"]\n)\n\n@app.route('/api/sensitive')\n@limiter.limit(\"10 per minute\")\n@require_auth\ndef sensitive_endpoint():\n    return jsonify({'data': 'protected'})\n```\n\n**3. Input Validation**\n```python\nfrom pydantic import BaseModel, validator, ValidationError\n\nclass UserInput(BaseModel):\n    email: str\n    age: int\n    \n    @validator('email')\n    def validate_email(cls, v):\n        if '@' not in v:\n            raise ValueError('Invalid email')\n        return v\n    \n    @validator('age')\n    def validate_age(cls, v):\n        if v < 0 or v > 150:\n            raise ValueError('Invalid age')\n        return v\n\n@app.route('/api/user', methods=['POST'])\n@require_auth\ndef create_user():\n    try:\n        data = UserInput(**request.json)\n        # Process validated data\n    except ValidationError as e:\n        return jsonify({'errors': e.errors()}), 400\n```\n\n**4. CORS Configuration**\n```python\nfrom flask_cors import CORS\n\nCORS(app, resources={\n    r\"/api/*\": {\n        \"origins\": [\"https://yourdomain.com\"],\n        \"methods\": [\"GET\", \"POST\"],\n        \"allow_headers\": [\"Content-Type\", \"Authorization\"]\n    }\n})\n```\n\n**5. Request Size Limits**\n```python\napp.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 16MB max\n```\n\n**6. Security Headers**\n```python\n@app.after_request\ndef add_security_headers(response):\n    response.headers['X-Content-Type-Options'] = 'nosniff'\n    response.headers['X-Frame-Options'] = 'DENY'\n    response.headers['X-XSS-Protection'] = '1; mode=block'\n    response.headers['Strict-Transport-Security'] = 'max-age=31536000; includeSubDomains'\n    return response\n```\n\n**7. API Key Management**\n```python\nimport secrets\n\ndef generate_api_key():\n    return secrets.token_urlsafe(32)\n\ndef validate_api_key(api_key):\n    # Hash comparison to prevent timing attacks\n    stored_hash = get_api_key_hash_from_db(api_key[:8])  # First 8 chars as lookup\n    return secrets.compare_digest(\n        hashlib.sha256(api_key.encode()).hexdigest(),\n        stored_hash\n    )\n```\n\n**Best Practices:**\n- ✅ Always use HTTPS\n- ✅ Implement comprehensive logging\n- ✅ Use API versioning (/api/v1/)\n- ✅ Document rate limits in API docs\n- ✅ Implement proper error handling (don't leak stack traces)\n- ✅ Regular security audits and penetration testing\n- ✅ Keep dependencies updated",
+        "sender": "assistant",
+        "created_at": "2024-10-26T14:27:45.000Z"
+      }
+    ]
+  },
+  {
+    "uuid": "conv_xyz789ghi012",
+    "name": "Docker Security Hardening",
+    "created_at": "2024-10-26T15:00:00.000Z",
+    "updated_at": "2024-10-26T15:10:00.000Z",
+    "chat_messages": [
+      {
+        "uuid": "msg_101",
+        "text": "What are the best practices for securing Docker containers?",
+        "sender": "human",
+        "created_at": "2024-10-26T15:00:10.000Z"
+      },
+      {
+        "uuid": "msg_102",
+        "text": "Here are essential Docker security best practices:\n\n**1. Use Minimal Base Images**\n```dockerfile\n# ❌ BAD: Large attack surface\nFROM ubuntu:latest\n\n# ✅ GOOD: Minimal distro\nFROM alpine:3.18\n# or\nFROM scratch  # For static binaries\n```\n\n**2. Don't Run as Root**\n```dockerfile\n# Create non-root user\nRUN addgroup -S appgroup && adduser -S appuser -G appgroup\nUSER appuser\n```\n\n**3. Scan for Vulnerabilities**\n```bash\n# Use Trivy\ntrivy image myimage:latest\n\n# Or Snyk\nsnyk container test myimage:latest\n```\n\n**4. Multi-stage Builds**\n```dockerfile\n# Build stage\nFROM golang:1.21 AS builder\nWORKDIR /app\nCOPY . .\nRUN go build -o myapp\n\n# Runtime stage (smaller, more secure)\nFROM alpine:3.18\nCOPY --from=builder /app/myapp /usr/local/bin/\nUSER nobody\nCMD [\"myapp\"]\n```\n\n**5. Secure Secrets Management**\n```bash\n# Never in Dockerfile!\n# Use Docker secrets or environment variables\ndocker secret create db_password ./password.txt\n```\n\n**6. Read-only Filesystem**\n```bash\ndocker run --read-only --tmpfs /tmp myimage\n```\n\n**7. Resource Limits**\n```yaml\n# docker-compose.yml\nservices:\n  app:\n    deploy:\n      resources:\n        limits:\n          cpus: '0.5'\n          memory: 512M\n```\n\nThese practices significantly reduce your attack surface!",
+        "sender": "assistant",
+        "created_at": "2024-10-26T15:02:30.000Z"
+      }
+    ]
+  }
+]

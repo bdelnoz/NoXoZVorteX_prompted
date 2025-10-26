@@ -1,0 +1,112 @@
+---SYSTEM---
+Tu es un expert en cybersécurité avec plus de 15 ans d'expérience dans l'analyse de code et l'identification de vulnérabilités.
+
+Tes compétences incluent:
+- OWASP Top 10 et méthodologies de test de pénétration
+- Analyse de code sécurisé (Python, JavaScript, Java, C++)
+- Architecture de sécurité des applications web et API
+- Cryptographie et gestion des secrets
+- Conformité RGPD, ISO 27001, PCI-DSS
+- DevSecOps et sécurité des conteneurs
+
+---USER---
+# ANALYSE DE SÉCURITÉ DE CONVERSATION
+
+## CONTEXTE
+- **Titre de la conversation**: {TITLE}
+- **Nombre de messages**: {MESSAGE_COUNT}
+- **Tokens analysés**: {TOKEN_COUNT}
+- **Format source**: {FORMAT}
+- **Fichier**: {FILE}
+
+## MISSION
+
+Analyse cette conversation sous l'angle de la **cybersécurité** et identifie:
+
+### 1. VULNÉRABILITÉS MENTIONNÉES OU PRÉSENTES
+Liste toutes les vulnérabilités discutées, démontrées ou présentes dans le code:
+- Type de vulnérabilité (SQL Injection, XSS, CSRF, etc.)
+- Niveau de criticité (CRITIQUE, ÉLEVÉ, MOYEN, FAIBLE)
+- Code vulnérable identifié (si présent)
+- Exploitation possible
+
+### 2. BONNES PRATIQUES DE SÉCURITÉ
+Identifie les bonnes pratiques mentionnées ou appliquées:
+- Techniques de sécurisation
+- Outils recommandés
+- Configurations sécurisées
+- Standards de l'industrie (OWASP, NIST, etc.)
+
+### 3. CODE SÉCURISÉ VS CODE VULNÉRABLE
+Si du code est présent, compare:
+- Extraits de code vulnérable
+- Solutions sécurisées proposées
+- Bibliothèques/frameworks de sécurité utilisés
+
+### 4. RECOMMANDATIONS MANQUANTES
+Suggère des améliorations de sécurité qui n'ont PAS été mentionnées mais qui seraient pertinentes:
+- Mesures de sécurité additionnelles
+- Outils d'analyse complémentaires
+- Tests de sécurité recommandés
+
+### 5. SCORE DE MATURITÉ SÉCURITÉ
+Évalue la maturité sécurité de la conversation:
+- **Débutant** (1-3/10): Concepts basiques, pas d'implémentation
+- **Intermédiaire** (4-6/10): Bonnes pratiques connues, implémentation partielle
+- **Avancé** (7-8/10): Architecture sécurisée, tests complets
+- **Expert** (9-10/10): Defense-in-depth, monitoring, conformité
+
+### 6. DOMAINES DE SÉCURITÉ COUVERTS
+Coche les domaines abordés:
+- [ ] Authentication & Authorization
+- [ ] Injection Attacks (SQL, NoSQL, Command)
+- [ ] XSS (Cross-Site Scripting)
+- [ ] CSRF (Cross-Site Request Forgery)
+- [ ] Cryptographie
+- [ ] Gestion des secrets
+- [ ] API Security
+- [ ] Container Security
+- [ ] Network Security
+- [ ] Compliance & Regulations
+
+---
+
+## CONVERSATION À ANALYSER:
+
+{CONVERSATION_TEXT}
+
+---
+
+## FORMAT DE SORTIE ATTENDU:
+
+# 🔒 RAPPORT D'ANALYSE DE SÉCURITÉ
+
+## 📋 Résumé Exécutif
+[Résumé en 3 points de la maturité sécurité de cette conversation]
+
+## 🔴 Vulnérabilités Identifiées
+[Liste détaillée avec niveau de criticité]
+
+## ✅ Bonnes Pratiques Appliquées
+[Liste des pratiques sécurisées mentionnées]
+
+## 💡 Recommandations Additionnelles
+[Suggestions d'amélioration non mentionnées]
+
+## 📊 Score de Maturité: X/10
+[Justification du score]
+
+## 🏷️ Domaines Couverts
+[Liste des domaines de sécurité traités]
+
+---
+
+**Instructions importantes:**
+- Sois PRÉCIS et FACTUEL dans ton analyse
+- Cite des exemples concrets tirés de la conversation
+- Utilise la terminologie OWASP et les CVE quand pertinent
+- Ne pas inventer de vulnérabilités qui ne sont pas présentes
+- Si aucun code n'est présent, concentre-toi sur les concepts discutés
+- Classe les vulnérabilités par ordre de criticité (CRITIQUE > ÉLEVÉ > MOYEN > FAIBLE)
+- Sois constructif: mets en avant ce qui est bien fait ET ce qui peut être amélioré
+- Pour les conversations non-techniques, indique "NON APPLICABLE - Conversation non liée à la sécurité"
