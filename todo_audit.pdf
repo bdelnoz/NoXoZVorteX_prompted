@@ -1,0 +1,64 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+2 0 obj
+<< /Length 727 >>
+stream
+BT
+/F1 10 Tf
+72 720 Td
+12 TL
+(# TODO \(plan d’actions\)) Tj
+T*
+() Tj
+T*
+(## Court terme) Tj
+T*
+(- [ ] Aligner les versions entre `config.py` et `analyse_conversations_merged.py`.) Tj
+T*
+(- [ ] Normaliser la liste des dépendances \(`DEPENDANCES`\) entre `config.py` et `install.py`.) Tj
+T*
+(- [ ] Compléter `README.md` avec guide d’installation + exemples.) Tj
+T*
+() Tj
+T*
+(## Moyen terme) Tj
+T*
+(- [ ] Factoriser `ensure_directory` dans `utils.py`.) Tj
+T*
+(- [ ] Ajouter un fichier de tests minimal \(smoke tests CLI\).) Tj
+T*
+() Tj
+T*
+(## Long terme) Tj
+T*
+(- [ ] Ajouter une documentation complète \(structure, flux, formats\).) Tj
+T*
+(- [ ] Mettre en place un pipeline CI pour lancer des tests automatiques.) Tj
+T*
+ET
+endstream
+endobj
+3 0 obj
+<< /Type /Page /Parent 4 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R >> >> /Contents 2 0 R >>
+endobj
+4 0 obj
+<< /Type /Pages /Kids [ 3 0 R ] /Count 1 >>
+endobj
+5 0 obj
+<< /Type /Catalog /Pages 4 0 R >>
+endobj
+xref
+0 6
+0000000000 65535 f 
+0000000009 00000 n 
+0000000079 00000 n 
+0000000857 00000 n 
+0000000983 00000 n 
+0000001042 00000 n 
+trailer
+<< /Size 6 /Root 5 0 R >>
+startxref
+1091
+%%EOF

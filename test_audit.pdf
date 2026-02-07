@@ -1,0 +1,231 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+2 0 obj
+<< /Length 2441 >>
+stream
+BT
+/F1 10 Tf
+72 720 Td
+12 TL
+(# Test Audit) Tj
+T*
+() Tj
+T*
+(## Tests unitaires) Tj
+T*
+(- Commande: `python -m unittest discover`) Tj
+T*
+(- Résultat:) Tj
+T*
+(```) Tj
+T*
+(----------------------------------------------------------------------) Tj
+T*
+(Ran 0 tests in 0.000s) Tj
+T*
+() Tj
+T*
+(OK) Tj
+T*
+(```) Tj
+T*
+() Tj
+T*
+(## Test global \(smoke test CLI\)) Tj
+T*
+(- Commande: `python analyse_conversations_merged.py --help`) Tj
+T*
+(- Résultat:) Tj
+T*
+(```) Tj
+T*
+(╔═══════════════════════════════════════════════════════════════╗) Tj
+T*
+(║  AI Conversation Prompt Executor v2.7.0                     ║) Tj
+T*
+(╚═══════════════════════════════════════════════════════════════╝) Tj
+T*
+() Tj
+T*
+(Version: v2.7.0) Tj
+T*
+(Auteur: Bruno DELNOZ) Tj
+T*
+() Tj
+T*
+(## DESCRIPTION) Tj
+T*
+(Moteur d'exécution de prompts personnalisés sur conversations AI.) Tj
+T*
+(Supporte ChatGPT, Claude et LeChat/Mistral.) Tj
+T*
+() Tj
+T*
+(## CONFIGURATION API) Tj
+T*
+(export MISTRAL_API_KEY='votre_clé_api') Tj
+T*
+() Tj
+T*
+(## OPTIONS PRINCIPALES) Tj
+T*
+(  --help              Affiche cette aide) Tj
+T*
+(  --help-adv          Affiche l'aide avancée complète ⭐) Tj
+T*
+(  --exec              Lance l'analyse) Tj
+T*
+(  --install           Installe les dépendances) Tj
+T*
+(  --prerequis         Vérifie les prérequis) Tj
+T*
+(  --changelog         Affiche le changelog) Tj
+T*
+() Tj
+T*
+(## FORMATS SUPPORTÉS) Tj
+T*
+(  --chatgpt           Format d'export ChatGPT) Tj
+T*
+(  --lechat            Format d'export LeChat \(Mistral\)) Tj
+T*
+(  --claude            Format d'export Claude) Tj
+T*
+(  --aiall, --auto     Auto-détection de TOUS les formats) Tj
+T*
+() Tj
+T*
+(## PROMPTS ⭐ NOUVEAU) Tj
+T*
+(  --prompt-file FILE  Fichier prompt à utiliser \(dans prompts/\)) Tj
+T*
+(  --prompt-list       Liste tous les prompts disponibles) Tj
+T*
+(  --prompt-text TEXT  Prompt direct en ligne de commande) Tj
+T*
+() Tj
+T*
+(## SOURCES DE DONNÉES) Tj
+T*
+(  --fichier, -F FILE  Fichier\(s\) JSON \(supporte *.json\)) Tj
+T*
+(  --recursive         Recherche récursive dans sous-dossiers) Tj
+T*
+() Tj
+T*
+(## OPTIONS D'EXÉCUTION) Tj
+T*
+(  --model, -m MODEL   Modèle Mistral \(défaut: pixtral-large-latest\)) Tj
+T*
+ET
+endstream
+endobj
+3 0 obj
+<< /Length 1474 >>
+stream
+BT
+/F1 10 Tf
+72 720 Td
+12 TL
+(  --workers, -w N     Workers parallèles \(défaut: 5\)) Tj
+T*
+(  --simulate          Mode simulation \(pas d'appel API\)) Tj
+T*
+() Tj
+T*
+(## ORGANISATION DES FICHIERS ⭐ NOUVEAU) Tj
+T*
+(  --target-logs DIR   Dossier pour les logs \(défaut: ./\)) Tj
+T*
+(  --target-results    Dossier pour les résultats \(défaut: ./\)) Tj
+T*
+(  --format FORMAT     csv, json, txt, markdown \(défaut: csv\)) Tj
+T*
+(  --output, -o FILE   Nom du fichier de sortie personnalisé) Tj
+T*
+() Tj
+T*
+(## EXEMPLES RAPIDES) Tj
+T*
+() Tj
+T*
+(1. Lister les prompts disponibles:) Tj
+T*
+(   python analyse_conversations_merged.py --prompt-list) Tj
+T*
+() Tj
+T*
+(2. Analyse simple avec prompt:) Tj
+T*
+(   python analyse_conversations_merged.py --exec \\) Tj
+T*
+(     --aiall --fichier *.json \\) Tj
+T*
+(     --prompt-file resume) Tj
+T*
+() Tj
+T*
+(3. Organisation complète:) Tj
+T*
+(   python analyse_conversations_merged.py --exec \\) Tj
+T*
+(     --prompt-file security_analysis \\) Tj
+T*
+(     --fichier data/*.json \\) Tj
+T*
+(     --target-logs ./logs \\) Tj
+T*
+(     --target-results ./results \\) Tj
+T*
+(     --format markdown) Tj
+T*
+() Tj
+T*
+(4. Mode simulation \(test sans API\):) Tj
+T*
+(   python analyse_conversations_merged.py --exec \\) Tj
+T*
+(     --simulate --prompt-file test \\) Tj
+T*
+(     --fichier export.json) Tj
+T*
+() Tj
+T*
+(💡 Pour plus de détails et d'exemples: --help-adv) Tj
+T*
+(📚 Documentation complète: voir STRUCTURE.md) Tj
+T*
+(```) Tj
+T*
+ET
+endstream
+endobj
+4 0 obj
+<< /Type /Page /Parent 6 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R >> >> /Contents 2 0 R >>
+endobj
+5 0 obj
+<< /Type /Page /Parent 6 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R >> >> /Contents 3 0 R >>
+endobj
+6 0 obj
+<< /Type /Pages /Kids [ 4 0 R 5 0 R ] /Count 2 >>
+endobj
+7 0 obj
+<< /Type /Catalog /Pages 6 0 R >>
+endobj
+xref
+0 8
+0000000000 65535 f 
+0000000009 00000 n 
+0000000079 00000 n 
+0000002572 00000 n 
+0000004098 00000 n 
+0000004224 00000 n 
+0000004350 00000 n 
+0000004415 00000 n 
+trailer
+<< /Size 8 /Root 7 0 R >>
+startxref
+4464
+%%EOF

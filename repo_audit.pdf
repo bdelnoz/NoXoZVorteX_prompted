@@ -1,0 +1,433 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+2 0 obj
+<< /Length 2059 >>
+stream
+BT
+/F1 10 Tf
+72 720 Td
+12 TL
+(# Audit du dépôt NoXoZVorteX_prompted) Tj
+T*
+() Tj
+T*
+(## 1\) Inventaire des fichiers \(par domaine/fonction\)) Tj
+T*
+() Tj
+T*
+(### Backend / cœur applicatif \(Python\)) Tj
+T*
+(- `analyse_conversations_merged.py`) Tj
+T*
+(- `config.py`) Tj
+T*
+(- `extractors.py`) Tj
+T*
+(- `prompt_executor.py`) Tj
+T*
+(- `result_formatter.py`) Tj
+T*
+(- `utils.py`) Tj
+T*
+(- `install.py`) Tj
+T*
+(- `help.py`) Tj
+T*
+() Tj
+T*
+(### Frontend) Tj
+T*
+(- Aucun fichier front-end \(pas de HTML/CSS/JS\).) Tj
+T*
+() Tj
+T*
+(### Data / exemples) Tj
+T*
+(- `data_example/example_claude_json.json`) Tj
+T*
+(- `data_example/example_chatgpt_json.json`) Tj
+T*
+(- `data_example/example_lechat_json.json`) Tj
+T*
+() Tj
+T*
+(### Prompts / templates) Tj
+T*
+(- `prompts/prompt_example_child_safety_prompt.txt`) Tj
+T*
+(- `prompts/prompt_example_security_prompt.txt`) Tj
+T*
+(- `prompts/prompt_example_full_security_analysis_prompt.txt`) Tj
+T*
+() Tj
+T*
+(### Scripts \(CLI / outils\)) Tj
+T*
+(- Tous les scripts sont en Python \(voir section Backend\).) Tj
+T*
+(- Aucun script `.sh`.) Tj
+T*
+() Tj
+T*
+(### Documentation) Tj
+T*
+(- `README.md`) Tj
+T*
+(- `TRY_THIS_FIRST.txt`) Tj
+T*
+(- `help_advanced.txt`) Tj
+T*
+(- `LICENSE`) Tj
+T*
+() Tj
+T*
+(### Configuration) Tj
+T*
+(- `config.py`) Tj
+T*
+(- `.gitignore`) Tj
+T*
+() Tj
+T*
+(### Infra / CI / déploiement) Tj
+T*
+(- Aucun fichier dédié \(pas de Dockerfile, CI, etc.\).) Tj
+T*
+() Tj
+T*
+(### Tests) Tj
+T*
+(- Aucun dossier/fichier de tests.) Tj
+T*
+() Tj
+T*
+(## 2\) Fichiers clés par domaine et usage) Tj
+T*
+() Tj
+T*
+(### Backend / cœur applicatif) Tj
+T*
+(- `analyse_conversations_merged.py` : point d’entrée CLI. Charge les exports JSON, détecte les doublons, décou) Tj
+T*
+(pe les conversations, exécute les prompts via l’API Mistral \(ou simulation\), puis sauvegarde les résultats en ) Tj
+T*
+(CSV/JSON/TXT/Markdown.) Tj
+T*
+(- `prompt_executor.py` : gestion des prompts \(chargement, formatage\), exécution des requêtes API Mistral avec ) Tj
+T*
+(retry, traitement d’une conversation pour produire un résultat.) Tj
+T*
+ET
+endstream
+endobj
+3 0 obj
+<< /Length 2881 >>
+stream
+BT
+/F1 10 Tf
+72 720 Td
+12 TL
+(- `extractors.py` : détection du format JSON \(ChatGPT/LeChat/Claude\) et extraction des messages.) Tj
+T*
+(- `result_formatter.py` : sérialisation des résultats dans plusieurs formats \(CSV/JSON/TXT/Markdown\).) Tj
+T*
+(- `utils.py` : logging, nettoyage du texte, comptage approximatif des tokens, génération de noms de sorties.) Tj
+T*
+(- `config.py` : constantes \(version, modèle, limites, dépendances, etc.\) et récupération de la clé API.) Tj
+T*
+(- `install.py` : création du venv, vérification/installation des dépendances et nettoyage de fichiers.) Tj
+T*
+(- `help.py` : aide CLI, aide avancée et changelog.) Tj
+T*
+() Tj
+T*
+(### Data / exemples) Tj
+T*
+(- `data_example/*.json` : fichiers d’exemples pour ChatGPT, LeChat et Claude.) Tj
+T*
+() Tj
+T*
+(### Prompts / templates) Tj
+T*
+(- `prompts/*.txt` : exemples de prompts utilisés par le moteur.) Tj
+T*
+() Tj
+T*
+(### Documentation) Tj
+T*
+(- `TRY_THIS_FIRST.txt` : commande d’exemple rapide.) Tj
+T*
+(- `help_advanced.txt` : aide CLI détaillée \(long format\).) Tj
+T*
+(- `README.md` : description minimale du dépôt.) Tj
+T*
+(- `LICENSE` : licence du projet.) Tj
+T*
+() Tj
+T*
+(### Configuration) Tj
+T*
+(- `config.py` : paramètres du runtime \(API, modèles, limites, etc.\).) Tj
+T*
+(- `.gitignore` : exclusions Git.) Tj
+T*
+() Tj
+T*
+(## 3\) Structure globale du projet) Tj
+T*
+() Tj
+T*
+(### Points d’entrée) Tj
+T*
+(- `analyse_conversations_merged.py` est le point d’entrée principal \(CLI\). Il orchestre l’ensemble du flux :) Tj
+T*
+(  1. Lecture des arguments et validation.) Tj
+T*
+(  2. Chargement des JSON et détection de format.) Tj
+T*
+(  3. Déduplication et découpage des conversations.) Tj
+T*
+(  4. Exécution du prompt \(API Mistral ou mode simulation\).) Tj
+T*
+(  5. Sauvegarde des résultats \(CSV/JSON/TXT/Markdown\).) Tj
+T*
+() Tj
+T*
+(### Modules principaux) Tj
+T*
+(- **Extraction & normalisation** : `extractors.py`.) Tj
+T*
+(- **Exécution de prompts** : `prompt_executor.py`.) Tj
+T*
+(- **Formatage des résultats** : `result_formatter.py`.) Tj
+T*
+(- **Utilitaires** : `utils.py`.) Tj
+T*
+(- **Configuration** : `config.py`.) Tj
+T*
+() Tj
+T*
+(### Flux de données \(résumé\)) Tj
+T*
+(- Entrée : exports JSON \(ChatGPT/LeChat/Claude\) -> `analyse_conversations_merged.py` -> `extractors.py`.) Tj
+T*
+(- Transformation : assemblage du texte + découpage par tokens -> `prompt_executor.py`.) Tj
+T*
+(- Sortie : résultats via `result_formatter.py`.) Tj
+T*
+() Tj
+T*
+(### Dépendances majeures \(Python\)) Tj
+T*
+(- `requests` \(appels API Mistral\), `tqdm` \(progression\), `tiktoken` \(comptage tokens\), `argparse`, `concurrent) Tj
+T*
+(.futures`.) Tj
+T*
+() Tj
+T*
+(## 4\) API) Tj
+T*
+(- Aucune API interne exposée \(pas de FastAPI/Flask/Express\). Le projet consomme l’API Mistral via HTTP.) Tj
+T*
+() Tj
+T*
+(## 5\) Scripts `.sh`) Tj
+T*
+(- Aucun.) Tj
+T*
+() Tj
+T*
+ET
+endstream
+endobj
+4 0 obj
+<< /Length 3053 >>
+stream
+BT
+/F1 10 Tf
+72 720 Td
+12 TL
+(## 6\) Scripts `.py` \(usage + imports\)) Tj
+T*
+() Tj
+T*
+(### `analyse_conversations_merged.py`) Tj
+T*
+(- Usage : CLI principal \(analyse, extraction, exécution de prompts\).) Tj
+T*
+(- Imports notables : `argparse`, `json`, `csv`, `glob`, `hashlib`, `concurrent.futures`, modules locaux \(`conf) Tj
+T*
+(ig`, `utils`, `extractors`, `install`, `help`, `prompt_executor`, `result_formatter`\).) Tj
+T*
+() Tj
+T*
+(### `prompt_executor.py`) Tj
+T*
+(- Usage : chargement/formatage des prompts, exécution API Mistral, traitement conversation.) Tj
+T*
+(- Imports notables : `requests`, `random`, `time`, `pathlib`, `typing`.) Tj
+T*
+() Tj
+T*
+(### `extractors.py`) Tj
+T*
+(- Usage : détecte le format JSON \(ChatGPT/LeChat/Claude\) et extrait les messages.) Tj
+T*
+(- Imports notables : `typing`, `utils.ecrire_log`.) Tj
+T*
+() Tj
+T*
+(### `result_formatter.py`) Tj
+T*
+(- Usage : écrit les résultats dans plusieurs formats \(CSV/JSON/TXT/Markdown\).) Tj
+T*
+(- Imports notables : `csv`, `json`, `datetime`, `pathlib`.) Tj
+T*
+() Tj
+T*
+(### `utils.py`) Tj
+T*
+(- Usage : logging, nettoyage texte, tokens, génération noms de sortie.) Tj
+T*
+(- Imports notables : `re`, `datetime`, `tiktoken` \(optionnel\).) Tj
+T*
+() Tj
+T*
+(### `config.py`) Tj
+T*
+(- Usage : constantes globales + récupération clé API.) Tj
+T*
+(- Imports notables : `os`.) Tj
+T*
+() Tj
+T*
+(### `install.py`) Tj
+T*
+(- Usage : vérification prérequis, création venv, installation dépendances.) Tj
+T*
+(- Imports notables : `subprocess`, `venv`, `shutil`.) Tj
+T*
+() Tj
+T*
+(### `help.py`) Tj
+T*
+(- Usage : affichage aide standard/avancée.) Tj
+T*
+(- Imports notables : `pathlib`, `config`.) Tj
+T*
+() Tj
+T*
+(## 7\) Duplications, conflits potentiels, obsolescence) Tj
+T*
+(- **Versions incohérentes** : `analyse_conversations_merged.py` annonce v3.0.1 alors que `config.py` est en v2) Tj
+T*
+(.7.0 \(risque de confusion sur les logs et paramètres\).) Tj
+T*
+(- **Redondance `ensure_directory`** : fonction similaire dans `analyse_conversations_merged.py` et `prompt_exe) Tj
+T*
+(cutor.py`.) Tj
+T*
+(- **Dépendances divergentes** : `install.py` déclare des dépendances de fallback \(`mistletoe`, `anthropic`, `p) Tj
+T*
+(ython-dotenv`\) non listées dans `config.py`.) Tj
+T*
+(- **Docs minimales** : `README.md` ne décrit pas l’usage, ce qui peut être perçu comme obsolète/incomplet.) Tj
+T*
+() Tj
+T*
+(## 8\) Tableau synthétique des fichiers) Tj
+T*
+() Tj
+T*
+(| Chemin | Usage |) Tj
+T*
+(| --- | --- |) Tj
+T*
+(| `analyse_conversations_merged.py` | CLI principal d’analyse et d’exécution de prompts. |) Tj
+T*
+(| `config.py` | Configuration globale \(versions, API, limites\). |) Tj
+T*
+(| `extractors.py` | Détection de format JSON + extraction de messages. |) Tj
+T*
+(| `prompt_executor.py` | Chargement/formatage de prompts et exécution API. |) Tj
+T*
+(| `result_formatter.py` | Export des résultats \(CSV/JSON/TXT/Markdown\). |) Tj
+T*
+(| `utils.py` | Utilitaires \(log, nettoyage, tokens, noms\). |) Tj
+T*
+(| `install.py` | Installation dépendances + venv. |) Tj
+T*
+ET
+endstream
+endobj
+5 0 obj
+<< /Length 557 >>
+stream
+BT
+/F1 10 Tf
+72 720 Td
+12 TL
+(| `help.py` | Aide CLI standard/avancée. |) Tj
+T*
+(| `data_example/*.json` | Exemples de données \(ChatGPT/LeChat/Claude\). |) Tj
+T*
+(| `prompts/*.txt` | Exemples de prompts. |) Tj
+T*
+(| `README.md` | Description minimale. |) Tj
+T*
+(| `TRY_THIS_FIRST.txt` | Exemple de commande rapide. |) Tj
+T*
+(| `help_advanced.txt` | Aide CLI détaillée. |) Tj
+T*
+(| `.gitignore` | Exclusions Git. |) Tj
+T*
+(| `LICENSE` | Licence. |) Tj
+T*
+() Tj
+T*
+(## 9\) Tableau des endpoints) Tj
+T*
+(- Non applicable \(aucune API exposée\).) Tj
+T*
+ET
+endstream
+endobj
+6 0 obj
+<< /Type /Page /Parent 10 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R >> >> /Contents 2 0 R >>
+endobj
+7 0 obj
+<< /Type /Page /Parent 10 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R >> >> /Contents 3 0 R >>
+endobj
+8 0 obj
+<< /Type /Page /Parent 10 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R >> >> /Contents 4 0 R >>
+endobj
+9 0 obj
+<< /Type /Page /Parent 10 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R >> >> /Contents 5 0 R >>
+endobj
+10 0 obj
+<< /Type /Pages /Kids [ 6 0 R 7 0 R 8 0 R 9 0 R ] /Count 4 >>
+endobj
+11 0 obj
+<< /Type /Catalog /Pages 10 0 R >>
+endobj
+xref
+0 12
+0000000000 65535 f 
+0000000009 00000 n 
+0000000079 00000 n 
+0000002190 00000 n 
+0000005123 00000 n 
+0000008228 00000 n 
+0000008836 00000 n 
+0000008963 00000 n 
+0000009090 00000 n 
+0000009217 00000 n 
+0000009344 00000 n 
+0000009422 00000 n 
+trailer
+<< /Size 12 /Root 11 0 R >>
+startxref
+9473
+%%EOF
