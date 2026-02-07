@@ -1,0 +1,76 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+2 0 obj
+<< /Length 1251 >>
+stream
+BT
+/F1 10 Tf
+72 720 Td
+12 TL
+(# Corrections à appliquer \(basées sur l’audit\)) Tj
+T*
+() Tj
+T*
+(## Priorité haute) Tj
+T*
+(1. **Aligner les versions** : harmoniser `config.py` \(v2.7.0\) avec `analyse_conversations_merged.py` \(v3.0.1\) ) Tj
+T*
+(pour éviter la confusion et garantir la cohérence des logs.) Tj
+T*
+(2. **Unifier les dépendances** : faire converger `DEPENDANCES` de `config.py` avec la liste utilisée dans `ins) Tj
+T*
+(tall.py` \(éviter les écarts\).) Tj
+T*
+(3. **Documenter l’usage** : enrichir `README.md` avec installation, exemples, variables d’environnement et for) Tj
+T*
+(mats supportés.) Tj
+T*
+() Tj
+T*
+(## Priorité moyenne) Tj
+T*
+(4. **Factoriser `ensure_directory`** : déplacer la fonction vers `utils.py` et l’utiliser partout pour éviter ) Tj
+T*
+(la duplication.) Tj
+T*
+(5. **Clarifier les fichiers d’exemple** : préciser dans la documentation leur rôle \(tests manuels, format atte) Tj
+T*
+(ndu\).) Tj
+T*
+() Tj
+T*
+(## Priorité basse) Tj
+T*
+(6. **Ajouter une section “Troubleshooting”** dans `README.md` pour erreurs courantes \(clé API manquante, venv ) Tj
+T*
+(non activé, etc.\).) Tj
+T*
+(7. **Ajouter un squelette de tests** \(smoke test CLI\) pour fiabiliser les exécutions futures.) Tj
+T*
+ET
+endstream
+endobj
+3 0 obj
+<< /Type /Page /Parent 4 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R >> >> /Contents 2 0 R >>
+endobj
+4 0 obj
+<< /Type /Pages /Kids [ 3 0 R ] /Count 1 >>
+endobj
+5 0 obj
+<< /Type /Catalog /Pages 4 0 R >>
+endobj
+xref
+0 6
+0000000000 65535 f 
+0000000009 00000 n 
+0000000079 00000 n 
+0000001382 00000 n 
+0000001508 00000 n 
+0000001567 00000 n 
+trailer
+<< /Size 6 /Root 5 0 R >>
+startxref
+1616
+%%EOF
